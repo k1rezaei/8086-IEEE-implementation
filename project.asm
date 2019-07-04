@@ -681,12 +681,33 @@ READ_FLOATS PROC NEAR
         MOV AX, count_float
         MOV f2, AX
         
+        MOV AX, curr_count
+        CMP AX, count_of_numbers
+        
+        JE tof
+        
         CALL DIV_FLOAT
         MOV AX, f12
         MOV input, AX        
         
         
         CALL PRINT_IEEE
+        
+        JMP end_tof
+        
+        tof:
+        MOV DL, '1'
+        CALL PRINT_OUT_BUFFER
+        MOV DL, '0'
+        CALL PRINT_OUT_BUFFER
+        MOV DL, '0'
+        CALL PRINT_OUT_BUFFER
+        MOV DL, '.'
+        CALL PRINT_OUT_BUFFER
+        MOV DL, '0'
+        CALL PRINT_OUT_BUFFER
+        
+        end_tof:
         
         MOV DL, 13
         CALL PRINT_OUT_BUFFER
